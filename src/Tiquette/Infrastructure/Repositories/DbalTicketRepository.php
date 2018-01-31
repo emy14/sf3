@@ -21,6 +21,7 @@ class DbalTicketRepository implements TicketRepository
     public function save(Ticket $ticket): void
     {
         $data = [
+
             'event_name' => $ticket->getEventName(),
             'event_description' => $ticket->getEventDescription(),
             'event_date' => $ticket->getEventDate()->format('Y-m-d\TH:i:00'),
@@ -78,6 +79,25 @@ SQL;
     {
         $query =<<<SQL
 SELECT * FROM tickets WHERE  bought_at_price != 0;
+SQL;
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+
+        $tickets = [];
+
+        while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+
+            $tickets[] = $this->hydrateFromRow($row);
+        }
+
+        return $tickets;
+    }
+
+    public function findById(int $id): array
+    {
+        $query =<<<SQL
+SELECT * FROM tickets WHERE  id = $id LIMIT 1;
 SQL;
 
         $statement = $this->connection->prepare($query);

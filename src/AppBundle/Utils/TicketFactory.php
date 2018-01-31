@@ -16,7 +16,8 @@ class TicketFactory
             $ticketSubmission->eventName,
             \DateTimeImmutable::createFromMutable($ticketSubmission->eventDate),
             $ticketSubmission->eventDescription,
-            0
+            $ticketSubmission->bought_at_price
         );
     }
+
 }

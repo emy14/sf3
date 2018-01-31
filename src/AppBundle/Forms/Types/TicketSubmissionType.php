@@ -22,6 +22,7 @@ class TicketSubmissionType extends AbstractType
                 'data' => new \DateTime('+1 day')
             ])
             ->add('eventDescription', TextareaType::class)
+            ->add('bought_at_price', TextType::class, ['label' => 'Bought at Price'])
             ->add('submit', SubmitType::class, ['label' => 'Submit'])
         ;
     }

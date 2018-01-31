@@ -3,5 +3,10 @@
 {% block title %}Validate{% endblock %}
 
 {% block body %}
+
+
+        <p>Nom de l'évenement : {{ ticket[0].eventName }}</p>
+        <p>Description de l'évenement : {{ ticket[0].eventDescription }}</p>
+
     {{ form(signUpForm) }}
 {% endblock %}

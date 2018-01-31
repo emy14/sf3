@@ -22,7 +22,7 @@ class SalesController extends Controller
             $ticketSubmissionForm->handleRequest($request);
             if ($ticketSubmissionForm->isSubmitted() && $ticketSubmissionForm->isValid()) {
 
-                $ticket = $this->get('ticket_factory')->fromTicketSubmission($ticketSubmission);
+                $ticket = $this->get('ticket_factory')->fromTicketSubmissionBis($ticketSubmission);
                 $this->get('repositories.ticket')->save($ticket);
 
                 return $this->redirectToRoute('ticket_submission_successful');

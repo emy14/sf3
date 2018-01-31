@@ -38,7 +38,6 @@ class TicketsController extends Controller
     {
 
         $propositionSign = new PropositionSubmission();
-
         $propositionForm = $this->createForm(PropositionSignType::class, $propositionSign);
 
         if ($request->isMethod('POST')) {
@@ -54,7 +53,9 @@ class TicketsController extends Controller
             }
         }
 
-        return $this->render('@App/Admin/Tickets/validation_tickets.html.twig',  ['signUpForm' => $propositionForm->createView()]);
+        $ticket = $this->get('repositories.ticket')->findById($request->get("id"));
+
+        return $this->render('@App/Admin/Tickets/validation_tickets.html.twig',  ['signUpForm' => $propositionForm->createView(), 'ticket' => $ticket]);
     }
 
     public function propositionSubmissionSuccessfulAction(Request $request): Response

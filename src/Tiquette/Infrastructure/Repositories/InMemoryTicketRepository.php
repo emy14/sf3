@@ -31,4 +31,10 @@ class InMemoryTicketRepository implements TicketRepository
     {
         return $this->tickets;
     }
+
+    public function findById(int $id): array
+    {
+        return $this->tickets;
+
+    }
 }

@@ -70,7 +70,7 @@ class Ticket
             $data['event_name'],
             \DateTimeImmutable::createFromFormat('Y-m-d H:i:00', $data['event_date']),
             $data['event_description'],
-            0
+            $data['bought_at_price']
         );
     }
 }

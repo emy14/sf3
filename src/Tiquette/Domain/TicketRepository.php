@@ -13,5 +13,7 @@ interface TicketRepository
     public function findAll(): array;
     public function findForBuying(): array;
     public function findSellTickets(): array;
+    public function findById(int $id): array;
+
 
 }

@@ -5,7 +5,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use AppBundle\Forms\PropositionSign;
+use AppBundle\Forms\PropositionSubmission;
 use AppBundle\Forms\Types\PropositionSignType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -37,15 +37,30 @@ class TicketsController extends Controller
     public function PropositionTicketAction(Request $request): Response
     {
 
-        $proposition = new PropositionSign();
+        $propositionSign = new PropositionSubmission();
 
-        $propositionForm = $this->createForm(PropositionSignType::class, $proposition);
+        $propositionForm = $this->createForm(PropositionSignType::class, $propositionSign);
 
         if ($request->isMethod('POST')) {
 
+            $propositionForm->handleRequest($request);
+            if ($propositionForm->isSubmitted() && $propositionForm->isValid()) {
+
+                $proposition = $this->get('proposition_factory')->fromPropositionSubmission($propositionSign, $request->get("id"));
+
+                $this->get('repositories.proposition')->save($proposition);
+
+                return $this->redirectToRoute('proposition_successful');
+            }
         }
 
         return $this->render('@App/Admin/Tickets/validation_tickets.html.twig',  ['signUpForm' => $propositionForm->createView()]);
     }
+
+    public function propositionSubmissionSuccessfulAction(Request $request): Response
+    {
+        return $this->render('@App/Admin/Tickets/proposition_successful.html.twig');
+    }
+
 
 }

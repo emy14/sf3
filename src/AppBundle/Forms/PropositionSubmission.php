@@ -9,7 +9,8 @@
 namespace AppBundle\Forms;
 
 
-class PropositionSign
+class PropositionSubmission
 {
         public $price;
+        public $id_ticket;
 }

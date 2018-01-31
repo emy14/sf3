@@ -12,23 +12,34 @@ namespace Tiquette\Domain;
 class Proposition
 {
     private $price;
+    private $id_ticket;
 
-    /**
-     * Proposition constructor.
-     * @param $price
-     */
-    public function __construct($price)
+    public static function submit(int $price, int $id_ticket): self
     {
-        $this->price = $price;
+        return new self($price, $id_ticket);
     }
 
-    /**
-     * @return mixed
-     */
+
+    public function __construct(int $price, $id_ticket)
+    {
+        $this->price = $price;
+        $this->id_ticket = $id_ticket;
+    }
+
+
     public function getPrice()
     {
         return $this->price;
     }
+
+
+    public function getIdTicket()
+    {
+        return $this->id_ticket;
+    }
+
+
+
 
 
 

@@ -38,5 +38,9 @@ admin.list_sell_tickets:
 
 
 admin.proposition.ticket:
-  path: /admin/tickets/proposition/{index}
+  path: /admin/tickets/proposition/{id}
   defaults: { _controller: AppBundle:Admin\Tickets:PropositionTicket }
+
+proposition_successful:
+    path:     /admin/tickets/successful
+    defaults: { _controller: AppBundle:Admin\Tickets:propositionSubmissionSuccessful }

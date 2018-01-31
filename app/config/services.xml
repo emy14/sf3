@@ -10,6 +10,13 @@
 
         <service id="repositories.ticket" alias="repositories.ticket.dbal" />
 
+
+        <service id="repositories.proposition.dbal" class="Tiquette\Infrastructure\Repositories\DbalPropositionRepository">
+            <argument type="service" id="doctrine.dbal.default_connection" />
+        </service>
+
+        <service id="repositories.proposition" alias="repositories.proposition.dbal" />
+
         <service id="repositories.member.dbal" class="Tiquette\Infrastructure\Repositories\DbalMemberRepository">
             <argument type="service" id="doctrine.dbal.default_connection" />
         </service>
@@ -49,6 +56,9 @@
             <argument type="service" id="role_promoter" />
             <tag name="console.command" />
         </service>
+
+        <service id="proposition_factory" class="AppBundle\Utils\PropositionFactory"/>
+
 
     </services>
 </container>

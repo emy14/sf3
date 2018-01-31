@@ -27,3 +27,16 @@ member_sign_out:
 admin.list_all_tickets:
   path: /admin/tickets/all
   defaults: { _controller: AppBundle:Admin\Tickets:listAllTickets }
+
+admin.list_buy_tickets:
+  path: /admin/tickets/buy
+  defaults: { _controller: AppBundle:Admin\Tickets:listForBuyingTickets }
+
+admin.list_sell_tickets:
+  path: /admin/tickets/sell
+  defaults: { _controller: AppBundle:Admin\Tickets:listSellTickets }
+
+
+admin.proposition.ticket:
+  path: /admin/tickets/proposition/{index}
+  defaults: { _controller: AppBundle:Admin\Tickets:PropositionTicket }

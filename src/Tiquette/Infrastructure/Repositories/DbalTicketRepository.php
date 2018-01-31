@@ -50,8 +50,46 @@ SQL;
         return $tickets;
     }
 
+    public function findForBuying(): array
+    {
+        $query =<<<SQL
+SELECT * FROM tickets WHERE  bought_at_price = 0;
+SQL;
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+
+        $tickets = [];
+
+        while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+
+            $tickets[] = $this->hydrateFromRow($row);
+        }
+
+        return $tickets;
+    }
+
     private function hydrateFromRow(array $row): Ticket
     {
         return Ticket::fromArray($row);
+    }
+
+    public function findSellTickets(): array
+    {
+        $query =<<<SQL
+SELECT * FROM tickets WHERE  bought_at_price != 0;
+SQL;
+
+        $statement = $this->connection->prepare($query);
+        $statement->execute();
+
+        $tickets = [];
+
+        while ($row = $statement->fetch(\PDO::FETCH_ASSOC)) {
+
+            $tickets[] = $this->hydrateFromRow($row);
+        }
+
+        return $tickets;
     }
 }

@@ -11,4 +11,7 @@ interface TicketRepository
 
     /** @return Ticket[] */
     public function findAll(): array;
+    public function findForBuying(): array;
+    public function findSellTickets(): array;
+
 }

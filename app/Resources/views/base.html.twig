@@ -27,6 +27,8 @@
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
                     <div class="dropdown-menu">
                         <a class="dropdown-item" href="{{ path('admin.list_all_tickets') }}">Voir tous les tickets proposés</a>
+                        <a class="dropdown-item" href="{{ path('admin.list_buy_tickets') }}">Voir les tickets en vente</a>
+                        <a class="dropdown-item" href="{{ path('admin.list_sell_tickets') }}">Voir les tickets vendus</a>
                     </div>
                 </li>
                  {% endif %}

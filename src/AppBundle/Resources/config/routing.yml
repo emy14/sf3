@@ -44,3 +44,15 @@ admin.proposition.ticket:
 proposition_successful:
     path:     /admin/tickets/successful
     defaults: { _controller: AppBundle:Admin\Tickets:propositionSubmissionSuccessful }
+
+user.list_all_tickets:
+  path: /user/tickets/all
+  defaults: { _controller: AppBundle:Sales:listAllTickets }
+
+user.list_buy_tickets:
+  path: /user/tickets/buy
+  defaults: { _controller: AppBundle:Sales:listForBuyingTickets }
+
+user.list_sell_tickets:
+  path: /user/tickets/sell
+  defaults: { _controller: AppBundle:Sales:listSellTickets }

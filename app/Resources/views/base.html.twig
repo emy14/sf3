@@ -16,12 +16,19 @@
             <ul class="nav nav-pills">
                 <li class="nav-item"><a class="nav-link" href="{{ path('homepage') }}">Accueil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('submit_ticket') }}">Vendre un ticket</a></li>
-                {%  if not is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <li><a class="nav-link" href="{{ path('member_sign_in') }}">Se connecter</a></li>
-                    <li><a class="nav-link" href="{{ path('member_sign_up') }}">S'inscrire</a></li>
-                {% else %}
-                    <li><a class="nav-link" href="{{ path('member_sign_out') }}">Déconnexion</a></li>
+
+
+                {% if is_granted('ROLE_USER') %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Mes tickets</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('user.list_all_tickets') }}">Voir tous mes tickets</a>
+                        <a class="dropdown-item" href="{{ path('user.list_buy_tickets') }}">Voir mes tickets en vente</a>
+                        <a class="dropdown-item" href="{{ path('user.list_sell_tickets') }}">Voir mes tickets vendus</a>
+                    </div>
+                </li>
                 {% endif %}
+
                 {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
@@ -32,6 +39,13 @@
                     </div>
                 </li>
                  {% endif %}
+
+                {%  if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <li><a class="nav-link" href="{{ path('member_sign_in') }}">Se connecter</a></li>
+                    <li><a class="nav-link" href="{{ path('member_sign_up') }}">S'inscrire</a></li>
+                {% else %}
+                    <li><a class="nav-link" href="{{ path('member_sign_out') }}">Déconnexion</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>

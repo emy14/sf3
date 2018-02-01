@@ -30,6 +30,17 @@
                     </div>
                 </li>
                  {% endif %}
+
+                {% if is_granted('ROLE_USER') %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">User</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ path('user.change.email') }}">Changement e-mail</a>
+                        </div>
+                    </li>
+                {% endif %}
+
+
             </ul>
         </div>
     </div>

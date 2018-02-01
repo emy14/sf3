@@ -2,12 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Forms\EmailChange;
 use AppBundle\Forms\MemberSignUp;
+use AppBundle\Forms\Types\EmailChangeType;
 use AppBundle\Forms\Types\MemberSignUpType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Tiquette\Domain\Email;
 
 class MembersController extends Controller
 {
@@ -55,4 +58,29 @@ class MembersController extends Controller
     }
 
     public function signOutAction(Request $request) {}
+
+    public function changeEmailAction(Request $request) {
+
+        $emailChange = new EmailChange();
+
+        $emailChangeForm = $this->createForm(EmailChangeType::class, $emailChange);
+
+
+        if ($request->isMethod('POST')) {
+
+            $emailChangeForm->handleRequest($request);
+            if ($emailChangeForm->isSubmitted() && $emailChangeForm->isValid()) {
+
+
+                $this->get('mailer')->sendCheckEmail(new Email($emailChange->email));
+
+
+                return $this->render('@App/Members/email_successful.html.twig', ['email' => $emailChange->email]);
+                }
+        }
+
+        return $this->render('@App/Members/member_change_email.html.twig', ['emailForm' => $emailChangeForm->createView()]);
+
+    }
+
 }

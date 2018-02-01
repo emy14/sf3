@@ -56,5 +56,8 @@
             <tag name="console.command" />
         </service>
 
+        <service id="mailer" class="AppBundle\Utils\Mailer" />
+
+
     </services>
 </container>

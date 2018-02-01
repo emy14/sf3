@@ -14,10 +14,11 @@ class Ticket
     private $eventDescription;
     private $boughtAtPrice;
 
-    public static function submit(int $id, string $eventName, \DateTimeImmutable $eventDate, string $eventDescription,
-        int $boughtAtPrice): self
+    public static function submit(string $eventName, \DateTimeImmutable $eventDate, string $eventDescription,
+        int $boughtAtPrice, int $id = null): self
     {
-        return new self($id, $eventName, $eventDate, $eventDescription, $boughtAtPrice);
+        if($id !=null) return new self($id, $eventName, $eventDate, $eventDescription, $boughtAtPrice);
+        else return new self($eventName, $eventDate, $eventDescription, $boughtAtPrice);
     }
 
 
@@ -50,9 +51,9 @@ class Ticket
 
 
 
-    private function __construct(int $id, string $eventName, \DateTimeImmutable $eventDate, string $eventDescription, int $boughtAtPrice)
+    private function __construct(string $eventName, \DateTimeImmutable $eventDate, string $eventDescription, int $boughtAtPrice, int $id = null)
     {
-        $this->id = $id;
+        if($id != null) $this->id = $id;
         $this->eventName = $eventName;
         $this->eventDate = $eventDate;
         $this->eventDescription = $eventDescription;
@@ -66,11 +67,12 @@ class Ticket
     public static function fromArray(array $data): self
     {
         return new self(
-            $data['id'],
             $data['event_name'],
             \DateTimeImmutable::createFromFormat('Y-m-d H:i:00', $data['event_date']),
             $data['event_description'],
-            $data['bought_at_price']
+            $data['bought_at_price'],
+            $data['id']
+
         );
     }
 }

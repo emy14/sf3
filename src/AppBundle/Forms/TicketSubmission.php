@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class TicketSubmission
 {
+
     /** @Assert\NotBlank */
     public $eventName;
 

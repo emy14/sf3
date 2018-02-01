@@ -20,4 +20,15 @@ class TicketFactory
         );
     }
 
+        public function fromTicketShow(TicketSubmission $ticketSubmission): Ticket
+    {
+        return Ticket::show(
+            $ticketSubmission->eventName,
+            \DateTimeImmutable::createFromMutable($ticketSubmission->eventDate),
+            $ticketSubmission->eventDescription,
+            $ticketSubmission->bought_at_price
+        );
+    }
+
+
 }
